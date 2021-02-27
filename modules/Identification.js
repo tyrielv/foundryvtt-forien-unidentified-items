@@ -220,12 +220,12 @@ export default class Identification {
           if (!confirmed) return;
 
           let form = html.find('form')[0];
-          let formData = validateForm(form);
+          let formData = new FormDataExtended(form);
 
-          delete formData["img-keep"];
-          delete formData["name-keep"];
+          formData.delete("img-keep");
+          formData.delete("name-keep");
 
-          formData = Object.fromEntries(Object.entries(formData).filter(e => e[1] !== false));
+          formData = Object.fromEntries(Array.from(formData.entries()).filter(e => e[1] != false));
 
           Object.keys(formData).forEach(property => {
             if (property.startsWith("data.")) {
